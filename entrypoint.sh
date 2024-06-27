@@ -13,5 +13,5 @@ echo "JVM_ARGS=${JVM_ARGS}"
 echo "jmeter args=$@"
 
 # Run JMeter
-jmeter -n $@
-echo "END Running Jmeter on $(date)"
+# jmeter -n $@
+# echo "END Running Jmeter on $(date)"
