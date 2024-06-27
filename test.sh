@@ -3,17 +3,16 @@
 # Test the JMeter Docker image using a custom test plan.
 
 # Set User Defined Variables for the JMeter test
-# This is for the test plan that are test discours.io so change it in futere with vars
-export URL_HOST="${URL_HOST:-testing2.discours.io}"
-export SCHEME="${SCHEME:-https}"
-export URL_CORE="${URL_CORE:-coretest.discours.io}"
-export URL_AUTH="${URL_AUTH:-authtest.discours.io}"
-export URL_PRESENCE="${URL_PRESENCE:-presencetest.discours.io}"
+: "${URL_HOST:=testing2.discours.io}"
+: "${SCHEME:=https}"
+: "${URL_CORE:=coretest.discours.io}"
+: "${URL_AUTH:=authtest.discours.io}"
+: "${URL_PRESENCE:=presencetest.discours.io}"
 
 # Custom parameters for load testing
-export USERS="${USERS:-1}"
-export RAMPUP="${RAMPUP:-1}"
-export DURATION="${DURATION:-60}"
+: "${USERS:=1}"
+: "${RAMPUP:=1}"
+: "${DURATION:=60}"
 
 T_DIR=/tests
 
@@ -32,14 +31,14 @@ R_DIR=${T_DIR}/report
 rm -rf ${R_DIR} > /dev/null 2>&1
 mkdir -p ${R_DIR}
 
-/bin/rm -f ${T_DIR}/test-plan.jtl ${T_DIR}/jmeter.log  > /dev/null 2>&1
+/bin/rm -f ${T_DIR}/test-plan.jtl ${T_DIR}/jmeter.log > /dev/null 2>&1
 
-./run.sh -Dlog_level.jmeter=DEBUG \
+# Run JMeter in non-GUI mode
+jmeter -n -t ${LATEST_JMX} -l ${T_DIR}/test-plan.jtl -j ${T_DIR}/jmeter.log \
+    -e -o ${R_DIR} -Dlog_level.jmeter=DEBUG \
     -Jurl_host=${URL_HOST} -Jscheme=${SCHEME} \
     -Jurl_core=${URL_CORE} -Jurl_auth=${URL_AUTH} -Jurl_presence=${URL_PRESENCE} \
-    -Jusers=${USERS} -JrampupPeriod=${RAMPUP} -Jduration=${DURATION} \
-    -n -t ${LATEST_JMX} -l ${T_DIR}/test-plan.jtl -j ${T_DIR}/jmeter.log \
-    -e -o ${R_DIR}
+    -Jusers=${USERS} -JrampupPeriod=${RAMPUP} -Jduration=${DURATION}
 
 echo "==== jmeter.log ===="
 cat ${T_DIR}/jmeter.log
