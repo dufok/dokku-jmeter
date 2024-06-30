@@ -2,12 +2,12 @@
 #
 # Test the JMeter Docker image using a custom test plan.
 
-# Set User Defined Variables for the JMeter test
-: "${URL_HOST:=testing2.discours.io}"
-: "${SCHEME:=https}"
-: "${URL_CORE:=coretest.discours.io}"
-: "${URL_AUTH:=authtest.discours.io}"
-: "${URL_PRESENCE:=presencetest.discours.io}"
+# This is example of how to config default parameters for the test plan if needed
+# : "${URL_HOST:=testing2.discours.io}"
+# : "${SCHEME:=https}"
+# : "${URL_CORE:=coretest.discours.io}"
+# : "${URL_AUTH:=authtest.discours.io}"
+# : "${URL_PRESENCE:=presencetest.discours.io}"
 
 # Custom parameters for load testing
 : "${USERS:=1}"
