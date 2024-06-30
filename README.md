@@ -52,3 +52,7 @@ Finally, push your configurations to Dokku. You can follow a workflow example fo
 ---
 
 By following these steps, you will have JMeter set up on Dokku with custom configurations tailored to your testing environment.
+
+---
+
+# RESULTS WILL BE IN /var/lib/dokku/data/storage/jmeter/tests #
